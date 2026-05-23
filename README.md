@@ -5,7 +5,7 @@ KrishiConnect is a comprehensive agricultural marketplace platform that connects
 
 ## Features Implemented
 
-### 🎨 Enhanced UI/UX
+### Enhanced UI/UX
 - Modern, responsive design with improved color scheme
 - Smooth animations and transitions
 - Professional typography and layout
@@ -13,13 +13,13 @@ KrishiConnect is a comprehensive agricultural marketplace platform that connects
 - Attractive slideshow with navigation dots
 - Clean, intuitive navigation
 
-### 🔐 Authentication System
+### Authentication System
 - Dual user types: Farmer and Wholesaler
 - Phone number + access code authentication
 - Demo credentials provided for testing
 - Session management with user-specific dashboards
 
-### 👨‍🌾 Farmer Dashboard
+### Farmer Dashboard
 - Personal dashboard with statistics
 - Crop management (add, edit, view)
 - Profile management with picture upload
@@ -27,21 +27,21 @@ KrishiConnect is a comprehensive agricultural marketplace platform that connects
 - Recent activity tracking
 - Earnings and inquiry tracking
 
-### 🏪 Wholesaler Dashboard
+### Wholesaler Dashboard
 - Browse available crops from farmers
 - Contact farmers directly
 - Market price analysis
 - Profile management
 - Search and filter functionality
 
-### 📱 Core Pages
+### Core Pages
 - **Homepage**: Slideshow, featured products, about section
 - **Product Listing**: 16 products with real vegetable images
 - **Market Prices**: Live pricing with filters and trends
 - **User Dashboards**: Role-specific interfaces
 - **Profile Management**: Picture upload and information editing
 
-### 🖼️ Visual Assets
+### Visual Assets
 - Logo integration on all pages
 - 13 high-quality vegetable images
 - Professional slideshow images
