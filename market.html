@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Krishi Connect | Home</title>
+  <!-- Link to Google Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+  <link rel="stylesheet" href="market.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="Assets/krishiconnectlogo.png" alt="Krishi Connect Logo" class="logo">
+      <h1 class="site-title">Krishi Connect</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="market.html">Products</a>
+      <a href="market-prices.html">Market Prices</a>
+      <a href="profile.html">My profile</a>
+      <a href="../index.html" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Background Slideshow -->
+<section class="hero-section">
+  <!-- These images will be the background slideshow -->
+<div class="hero-bg-slide" style="background-image: url('Assets/potatoess.jpg');"></div>
+<div class="hero-bg-slide" style="background-image: url('Assets/img2.jpg');"></div>
+<div class="hero-bg-slide" style="background-image: url('Assets/img3.jpg');"></div>
+<div class="hero-bg-slide" style="background-image: url('Assets/img4.jpg');"></div>
+  
+  <div class="hero-content">
+    <p class="hero-subtitle">Welcome to a Fresher World</p>
+    <h1 class="hero-title">Indulge in Farm-Fresh Flavors</h1>
+    <p class="hero-description">Discover a world of exceptional tastes curated just for you. From farm-fresh produce to gourmet delicacies, all handpicked.</p>
+    <a href="#products" class="btn-primary">Shop Now →</a>
+  </div>
+</section>
+
+  <!-- Main Content -->
+  <main class="container" id="products">
+    
+    <!-- Today's Products Section -->
+    <section class="products-section">
+      <h2 class="section-title">Today's Products</h2>
+      
+      <div class="product-grid">
+        <!-- Row 1 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/broccoli.jpg" alt="Broccoli">
+            <button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Broccoli</h4>
+            <div class="product-rating">
+              <span class="material-icons-outlined">star</span><span> 4.8 (121)</span>
+            </div>
+            <div class="product-buy">
+              <p class="product-price">Rs. 90/kg</p>
+              <a href="purchase.html" class="btn-secondary">Add to Cart</a>
+              <a href="purchase.html" class="btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/tomato.jpg" alt="Tomato">
+            <button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Tomato</h4>
+            <div class="product-rating">
+              <span class="material-icons-outlined">star</span><span> 4.9 (320)</span>
+            </div>
+            <div class="product-buy">
+              <p class="product-price">Rs. 50/kg</p>
+              <a href="purchase.html" class="btn-secondary">Add to Cart</a>
+              <a href="purchase.html" class="btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/vegetable_basket.jpg" alt="Vegetable Basket">
+            <button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Veggie Basket</h4>
+            <div class="product-rating">
+              <span class="material-icons-outlined">star</span><span> 4.7 (88)</span>
+            </div>
+            <div class="product-buy">
+              <p class="product-price">Rs. 250/basket</p>
+              <a href="purchase.html" class="btn-secondary">Add to Cart</a>
+              <a href="purchase.html" class="btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="images/lettuce.jpg" alt="Lettuce">
+            <button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Lettuce Leaf</h4>
+            <div class="product-rating">
+              <span class="material-icons-outlined">star</span><span> 4.6 (150)</span>
+            </div>
+            <div class="product-buy">
+              <p class="product-price">Rs. 45/bunch</p>
+              <a href="purchase.html" class="btn-secondary">Add to Cart</a>
+              <a href="purchase.html" class="btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add 16 more cards to make 5 rows -->
+        <!-- You can copy-paste the block above and change the details -->
+        <div class="product-card"><div class="product-image"><img src="Assets/eggplant.jpg" alt="Eggplant"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Eggplant</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.5 (95)</span></div><div class="product-buy"><p class="product-price">Rs. 35/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/carrot.jpg" alt="Carrot"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Carrot</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.8 (210)</span></div><div class="product-buy"><p class="product-price">Rs. 60/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/potato.jpg" alt="Potato"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Potato</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.9 (400)</span></div><div class="product-buy"><p class="product-price">Rs. 30/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/bell_pepper.jpg" alt="Bell Pepper"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Capsicum</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.7 (180)</span></div><div class="product-buy"><p class="product-price">Rs. 100/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/onion.jpg" alt="Onion"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Onion</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.9 (500+)</span></div><div class="product-buy"><p class="product-price">Rs. 40/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/cucumber.jpg" alt="Cucumber"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Cucumber</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.6 (132)</span></div><div class="product-buy"><p class="product-price">Rs. 30/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/corn.jpg" alt="Corn"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Sweet Corn</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.8 (190)</span></div><div class="product-buy"><p class="product-price">Rs. 70/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/garlic.jpg" alt="Garlic"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Garlic</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.7 (250)</span></div><div class="product-buy"><p class="product-price">Rs. 200/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/spinach.jpg" alt="Spinach"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Spinach</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.6 (110)</span></div><div class="product-buy"><p class="product-price">Rs. 25/bunch</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/cauliflower.jpg" alt="Cauliflower"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Cauliflower</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.5 (99)</span></div><div class="product-buy"><p class="product-price">Rs. 30/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/pumpkin.jpg" alt="Pumpkin"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Pumpkin</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.7 (142)</span></div><div class="product-buy"><p class="product-price">Rs. 40/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+        <div class="product-card"><div class="product-image"><img src="images/beetroot.jpg" alt="Beetroot"><button class="wishlist-btn"><i class="material-icons-outlined">favorite_border</i></button></div><div class="product-info"><h4 class="product-name">Beetroot</h4><div class="product-rating"><span class="material-icons-outlined">star</span><span> 4.6 (85)</span></div><div class="product-buy"><p class="product-price">Rs. 55/kg</p><a href="purchase.html" class="btn-secondary">Add to Cart</a><a href="purchase.html" class="btn-primary">Buy Now</a></div></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Krishi Connect. All rights reserved.</p>
+  </footer>
+
+  <script src="JS/market.js"></script>
+</body>
+</html>

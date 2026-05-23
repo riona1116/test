@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Products - KrishiConnect</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="krishiconnectlogo.png" type="image/png">
+</head>
+<body>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <img src="krishiconnectlogo.png" alt="KrishiConnect" class="nav__logo-img">
+                <span>KrishiConnect</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="ri-home-line"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="market-prices.html" class="nav__link">
+                            <i class="ri-line-chart-line"></i>
+                            <span>Market Prices</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="crop-listing.html" class="nav__link active-link">
+                            <i class="ri-plant-line"></i>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link" onclick="showLoginModal()">
+                            <i class="ri-user-line"></i>
+                            <span>Login</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!--=============== MAIN ===============-->
+    <main class="main">
+        <!--=============== PRODUCTS HERO ===============-->
+        <section class="products-hero section">
+            <div class="container">
+                <div class="products-hero__content">
+                    <h1 class="products-hero__title">
+                        Today's Fresh <span>Products</span>
+                    </h1>
+                    <p class="products-hero__description">
+                        Discover fresh, high-quality agricultural products directly from local farmers. 
+                        Connect with producers and get the best deals on seasonal crops.
+                    </p>
+                    <div class="products-hero__stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-products">16</span>
+                            <span class="stat-label">Fresh Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-farmers">12</span>
+                            <span class="stat-label">Local Farmers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Organic</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-hero__image">
+                    <img src="carrots.jpg" alt="Fresh Products" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!--=============== PRODUCT FILTERS ===============-->
+        <section class="product-filters section">
+            <div class="container">
+                <div class="filters__container">
+                    <div class="filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter" onchange="filterProducts()">
+                            <option value="">All Categories</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="grains">Grains & Cereals</option>
+                            <option value="spices">Spices</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-filter">Price Range</label>
+                        <select id="price-filter" onchange="filterProducts()">
+                            <option value="">All Prices</option>
+                            <option value="0-50">Rs. 0 - 50</option>
+                            <option value="51-100">Rs. 51 - 100</option>
+                            <option value="101-200">Rs. 101 - 200</option>
+                            <option value="201+">Rs. 201+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="location-filter">Location</label>
+                        <input type="text" id="location-filter" placeholder="Search by location..." oninput="filterProducts()">
+                    </div>
+                    <div class="filter-group">
+                        <label for="search-filter">Search</label>
+                        <input type="text" id="search-filter" placeholder="Search products..." oninput="filterProducts()">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-outline" onclick="clearFilters()">
+                            <i class="ri-refresh-line"></i>
+                            Clear Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== PRODUCTS GRID ===============-->
+        <section class="products-grid section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Available Products</h2>
+                    <p class="section__subtitle">Fresh from our local farmers</p>
+                </div>
+
+                <div class="products__container" id="products-container">
+                    <!-- Products will be loaded here -->
+                </div>
+
+                <div class="load-more__container">
+                    <button class="btn btn-outline" id="load-more-btn" onclick="loadMoreProducts()" style="display: none;">
+                        <i class="ri-add-line"></i>
+                        Load More Products
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== FEATURED FARMERS ===============-->
+        <section class="featured-farmers section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Featured Farmers</h2>
+                    <p class="section__subtitle">Meet our trusted agricultural partners</p>
+                </div>
+
+                <div class="farmers__grid">
+                    <div class="farmer-card">
+                        <div class="farmer-card__avatar">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <div class="farmer-card__content">
+                            <h3 class="farmer-card__name">Ram Bahadur Thapa</h3>
+                            <p class="farmer-card__location">
+                                <i class="ri-map-pin-line"></i>
+                                Chitwan, Nepal
+                            </p>
+                            <p class="farmer-card__specialty">Specializes in organic vegetables</p>
+                            <div class="farmer-card__stats">
+                                <div class="stat">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-label">Products</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">4.8</span>
+                                    <span class="stat-label">Rating</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="showLoginModal()">
+                                <i class="ri-message-line"></i>
+                                Contact Farmer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="farmer-card">
+                        <div class="farmer-card__avatar">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <div class="farmer-card__content">
+                            <h3 class="farmer-card__name">Sita Devi Sharma</h3>
+                            <p class="farmer-card__location">
+                                <i class="ri-map-pin-line"></i>
+                                Kaski, Nepal
+                            </p>
+                            <p class="farmer-card__specialty">Rice and grain cultivation</p>
+                            <div class="farmer-card__stats">
+                                <div class="stat">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">Products</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">4.9</span>
+                                    <span class="stat-label">Rating</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="showLoginModal()">
+                                <i class="ri-message-line"></i>
+                                Contact Farmer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="farmer-card">
+                        <div class="farmer-card__avatar">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <div class="farmer-card__content">
+                            <h3 class="farmer-card__name">Krishna Prasad Poudel</h3>
+                            <p class="farmer-card__location">
+                                <i class="ri-map-pin-line"></i>
+                                Lalitpur, Nepal
+                            </p>
+                            <p class="farmer-card__specialty">Spices and herbs expert</p>
+                            <div class="farmer-card__stats">
+                                <div class="stat">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-label">Products</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">4.7</span>
+                                    <span class="stat-label">Rating</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="showLoginModal()">
+                                <i class="ri-message-line"></i>
+                                Contact Farmer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="farmer-card">
+                        <div class="farmer-card__avatar">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <div class="farmer-card__content">
+                            <h3 class="farmer-card__name">Hari Bahadur Magar</h3>
+                            <p class="farmer-card__location">
+                                <i class="ri-map-pin-line"></i>
+                                Rupandehi, Nepal
+                            </p>
+                            <p class="farmer-card__specialty">Mixed farming specialist</p>
+                            <div class="farmer-card__stats">
+                                <div class="stat">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-label">Products</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">4.6</span>
+                                    <span class="stat-label">Rating</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="showLoginModal()">
+                                <i class="ri-message-line"></i>
+                                Contact Farmer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== CALL TO ACTION ===============-->
+        <section class="cta section">
+            <div class="container">
+                <div class="cta__content">
+                    <div class="cta__info">
+                        <h2 class="cta__title">Ready to Start Trading?</h2>
+                        <p class="cta__description">
+                            Join thousands of farmers and wholesalers who are already benefiting from our platform. 
+                            Start connecting with agricultural partners today.
+                        </p>
+                        <div class="cta__features">
+                            <div class="feature-item">
+                                <i class="ri-check-line"></i>
+                                <span>Direct farmer connections</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="ri-check-line"></i>
+                                <span>Real-time market prices</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="ri-check-line"></i>
+                                <span>Secure transactions</span>
+                            </div>
+                        </div>
+                        <div class="cta__buttons">
+                            <button class="btn btn-primary" onclick="showLoginModal()">
+                                <i class="ri-user-add-line"></i>
+                                Join as Farmer
+                            </button>
+                            <button class="btn btn-outline" onclick="showLoginModal()">
+                                <i class="ri-store-line"></i>
+                                Join as Wholesaler
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cta__image">
+                        <img src="tea.jpg" alt="Join KrishiConnect" class="cta-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--=============== FOOTER ===============-->
+    <footer class="footer section">
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <a href="index.html" class="footer__logo">
+                        <img src="krishiconnectlogo.png" alt="KrishiConnect" class="footer__logo-img">
+                        <span>KrishiConnect</span>
+                    </a>
+                    <p class="footer__description">
+                        Connecting farmers, wholesalers, and buyers for a sustainable agricultural ecosystem in Nepal.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Quick Links</h3>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Home</a></li>
+                        <li><a href="market-prices.html" class="footer__link">Market Prices</a></li>
+                        <li><a href="crop-listing.html" class="footer__link">Products</a></li>
+                        <li><a href="#" class="footer__link">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Services</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Farmer Registration</a></li>
+                        <li><a href="#" class="footer__link">Wholesaler Portal</a></li>
+                        <li><a href="#" class="footer__link">Price Alerts</a></li>
+                        <li><a href="#" class="footer__link">Market Analysis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Contact Info</h3>
+                    <ul class="footer__links">
+                        <li class="footer__info">
+                            <i class="ri-phone-line"></i>
+                            <span>+977-1-4567890</span>
+                        </li>
+                        <li class="footer__info">
+                            <i class="ri-mail-line"></i>
+                            <span>info@krishiconnect.com</span>
+                        </li>
+                        <li class="footer__info">
+                            <i class="ri-map-pin-line"></i>
+                            <span>Kathmandu, Nepal</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">
+                    &copy; 2024 KrishiConnect. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!--=============== PRODUCT DETAIL MODAL ===============-->
+    <div class="modal" id="product-modal">
+        <div class="modal__content modal__content--large">
+            <div class="modal__header">
+                <h2 class="modal__title" id="modal-product-title">Product Details</h2>
+                <button class="modal__close" id="product-modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="product-detail">
+                    <div class="product-detail__image">
+                        <img id="modal-product-image" src="" alt="Product">
+                    </div>
+                    <div class="product-detail__info">
+                        <div class="product-detail__header">
+                            <h3 id="modal-product-name">Product Name</h3>
+                            <span class="product-detail__price" id="modal-product-price">Rs. 0</span>
+                        </div>
+                        <div class="product-detail__farmer">
+                            <i class="ri-user-line"></i>
+                            <span id="modal-farmer-name">Farmer Name</span>
+                        </div>
+                        <div class="product-detail__specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Category:</span>
+                                <span class="spec-value" id="modal-product-category">Category</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Quantity Available:</span>
+                                <span class="spec-value" id="modal-product-quantity">0 kg</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Location:</span>
+                                <span class="spec-value" id="modal-product-location">Location</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Harvest Date:</span>
+                                <span class="spec-value" id="modal-harvest-date">Date</span>
+                            </div>
+                        </div>
+                        <div class="product-detail__description">
+                            <h4>Description</h4>
+                            <p id="modal-product-description">Product description will appear here.</p>
+                        </div>
+                        <div class="product-detail__actions">
+                            <button class="btn btn-primary" onclick="contactFarmer()">
+                                <i class="ri-message-line"></i>
+                                Contact Farmer
+                            </button>
+                            <button class="btn btn-outline" onclick="addToWishlist()">
+                                <i class="ri-heart-line"></i>
+                                Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=============== LOGIN MODAL ===============-->
+    <div class="modal" id="login-modal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Login to KrishiConnect</h2>
+                <button class="modal__close" id="modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <form class="login__form" id="login-form">
+                    <div class="form__group">
+                        <label for="user-type">I am a:</label>
+                        <select id="user-type" required>
+                            <option value="">Select user type</option>
+                            <option value="farmer">Farmer</option>
+                            <option value="wholesaler">Wholesaler</option>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label for="login-phone">Phone Number</label>
+                        <input type="tel" id="login-phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="login-code">Access Code</label>
+                        <input type="text" id="login-code" placeholder="Enter your access code" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="ri-login-circle-line"></i>
+                        Login
+                    </button>
+                </form>
+                <div class="login__help">
+                    <p>Demo Credentials:</p>
+                    <p><strong>Farmer:</strong> Phone: 9841234567, Code: FARMER123</p>
+                    <p><strong>Wholesaler:</strong> Phone: 9851234567, Code: WHOLE123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--=============== JAVASCRIPT ===============-->
+    <script src="script.js"></script>
+    <script src="crop-listing.js"></script>
+</body>
+</html>
+

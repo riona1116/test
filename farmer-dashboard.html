@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - Krishi Connect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="farmer.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="icon" href="krishiconnectlogo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <img src="krishiconnectlogo.png" alt="Krishi Connect Logo" class="nav__logo-img">
+                <span class="nav__logo-text">Krishi Connect</span>
+            </div>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#dashboard" class="nav__link active-link">Dashboard</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#my-crops" class="nav__link">My Crops</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#add-crop" class="nav__link">Add Crop</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#market-prices" class="nav__link">Market Prices</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#profile" class="nav__link">Profile</a>
+                    </li>
+                </ul>
+                
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+            
+            <div class="nav__actions">
+                <button class="nav__logout-btn" id="logout-btn">
+                    <i class="ri-logout-box-line"></i>
+                    Logout
+                </button>
+                
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- DASHBOARD OVERVIEW -->
+        <section class="dashboard section" id="dashboard">
+            <div class="container">
+                <div class="dashboard__header">
+                    <div class="dashboard__welcome">
+                        <h1 class="dashboard__title">Welcome back, <span id="farmer-name">Farmer</span>!</h1>
+                        <p class="dashboard__subtitle">Manage your crops and connect with buyers</p>
+                    </div>
+                    <div class="dashboard__stats">
+                        <div class="stat-card">
+                            <div class="stat-card__icon">
+                                <i class="ri-plant-line"></i>
+                            </div>
+                            <div class="stat-card__content">
+                                <h3 class="stat-card__number" id="total-crops">0</h3>
+                                <p class="stat-card__label">Active Crops</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__icon">
+                                <i class="ri-money-dollar-circle-line"></i>
+                            </div>
+                            <div class="stat-card__content">
+                                <h3 class="stat-card__number" id="total-earnings">Rs. 0</h3>
+                                <p class="stat-card__label">Total Earnings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__icon">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <div class="stat-card__content">
+                                <h3 class="stat-card__number" id="total-inquiries">0</h3>
+                                <p class="stat-card__label">Inquiries</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard__content">
+                    <div class="dashboard__quick-actions">
+                        <h2 class="section__title">Quick Actions</h2>
+                        <div class="quick-actions__grid">
+                            <button class="quick-action-btn" onclick="scrollToSection('add-crop')">
+                                <i class="ri-add-circle-line"></i>
+                                <span>Add New Crop</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="scrollToSection('my-crops')">
+                                <i class="ri-list-check"></i>
+                                <span>View My Crops</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="scrollToSection('market-prices')">
+                                <i class="ri-line-chart-line"></i>
+                                <span>Check Prices</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="scrollToSection('profile')">
+                                <i class="ri-user-settings-line"></i>
+                                <span>Update Profile</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard__recent">
+                        <h2 class="section__title">Recent Activity</h2>
+                        <div class="activity-list" id="recent-activity">
+                            <!-- Recent activities will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MY CROPS SECTION -->
+        <section class="my-crops section" id="my-crops">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">My Crops</h2>
+                    <p class="section__subtitle">Manage your listed crops</p>
+                </div>
+                
+                <div class="crops__grid" id="farmer-crops-grid">
+                    <!-- Farmer's crops will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ADD CROP SECTION -->
+        <section class="add-crop section" id="add-crop">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Add New Crop</h2>
+                    <p class="section__subtitle">List your crops for sale</p>
+                </div>
+                
+                <div class="add-crop__container">
+                    <form class="add-crop__form" id="add-crop-form">
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="crop-name">Crop Name</label>
+                                <select id="crop-name" required>
+                                    <option value="">Select a crop</option>
+                                    <option value="Tomatoes">Tomatoes</option>
+                                    <option value="Onions">Onions</option>
+                                    <option value="Potatoes">Potatoes</option>
+                                    <option value="Carrots">Carrots</option>
+                                    <option value="Chilli">Green Chilli</option>
+                                    <option value="Eggplant">Eggplant</option>
+                                    <option value="Spinach">Spinach</option>
+                                    <option value="Pumpkin">Pumpkin</option>
+                                    <option value="Rice">Rice</option>
+                                    <option value="Tea">Tea Leaves</option>
+                                    <option value="Cereals">Wheat/Cereals</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form__group">
+                                <label for="crop-quantity">Quantity (kg)</label>
+                                <input type="number" id="crop-quantity" placeholder="Enter quantity" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form__row">
+                            <div class="form__group">
+                                <label for="crop-price">Price per kg (Rs.)</label>
+                                <input type="number" id="crop-price" placeholder="Enter price" required>
+                            </div>
+
+                             <div class="filter-group">
+                                   <label for="date-filter">Harvest Date</label>
+                                      <input type="text" id="date-filter" placeholder="Select date" readonly>
+                                    </div>
+
+                            <div class="form__group">
+                                <label for="crop-location">Location</label>
+                                <input type="text" id="crop-location" placeholder="Your farm location" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form__group">
+                            <label for="crop-description">Description</label>
+                            <textarea id="crop-description" rows="4" placeholder="Describe your crop quality, farming methods, etc."></textarea>
+                        </div>
+                        
+                        <div class="form__group">
+                            <label for="crop-image">Crop Image</label>
+                            <div class="image-upload">
+                                <input type="file" id="crop-image" accept="image/*">
+                                <div class="image-preview" id="crop-image-preview">
+                                    <i class="ri-image-add-line"></i>
+                                    <span>Click to upload crop image</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="ri-add-line"></i>
+                            Add Crop
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARKET PRICES SECTION -->
+        <section class="market-prices section" id="market-prices">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Current Market Prices</h2>
+                    <p class="section__subtitle">Stay updated with latest market rates</p>
+                </div>
+                
+                <div class="market-prices__table-container">
+                    <table class="market-prices__table" id="farmer-market-prices-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Unit</th>
+                                <th>Min Price</th>
+                                <th>Max Price</th>
+                                <th>Avg Price</th>
+                                <th>Trend</th>
+                                <th>Your Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Market prices will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section class="profile section" id="profile">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">My Profile</h2>
+                    <p class="section__subtitle">Update your profile information</p>
+                </div>
+                
+                <div class="profile__container">
+                    <div class="profile__card">
+                        <div class="profile__avatar-section">
+                            <div class="profile__avatar" id="profile-avatar">
+                                <img src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=👤" alt="Profile Picture" id="profile-image">
+                                <div class="profile__avatar-overlay">
+                                    <i class="ri-camera-line"></i>
+                                </div>
+                            </div>
+                            <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
+                            <button class="btn btn-outline" onclick="document.getElementById('profile-picture-input').click()">
+                                <i class="ri-upload-line"></i>
+                                Change Picture
+                            </button>
+                        </div>
+                        
+                        <form class="profile__form" id="profile-form">
+                            <div class="form__row">
+                                <div class="form__group">
+                                    <label for="profile-name">Full Name</label>
+                                    <input type="text" id="profile-name" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="profile-phone">Phone Number</label>
+                                    <input type="tel" id="profile-phone" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form__row">
+                                <div class="form__group">
+                                    <label for="profile-location">Farm Location</label>
+                                    <input type="text" id="profile-location" placeholder="Your farm address">
+                                </div>
+                                <div class="form__group">
+                                    <label for="profile-experience">Years of Experience</label>
+                                    <input type="number" id="profile-experience" placeholder="Years in farming">
+                                </div>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="profile-bio">About Your Farm</label>
+                                <textarea id="profile-bio" rows="4" placeholder="Tell buyers about your farming practices, specialties, etc."></textarea>
+                            </div>
+                            
+                            <div class="form__actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="ri-save-line"></i>
+                                    Save Changes
+                                </button>
+                                <button type="button" class="btn btn-outline" onclick="resetProfileForm()">
+                                    <i class="ri-refresh-line"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__logo">
+                        <img src="krishiconnectlogo.png" alt="Krishi Connect Logo" class="footer__logo-img">
+                        <span class="footer__logo-text">Krishi Connect</span>
+                    </div>
+                    <p class="footer__description">
+                        Empowering farmers with direct market access.
+                    </p>
+                </div>
+                
+                <div class="footer__links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#my-crops">My Crops</a></li>
+                        <li><a href="#profile">Profile</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__support">
+                    <h3>Support</h3>
+                    <div class="footer__contact">
+                        <p><i class="ri-phone-line"></i> +977-1-4567890</p>
+                        <p><i class="ri-mail-line"></i> support@krishiconnect.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2024 Krishi Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CROP EDIT MODAL -->
+    <div class="modal" id="edit-crop-modal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Edit Crop</h2>
+                <button class="modal__close" id="edit-modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            
+            <div class="modal__body">
+                <form id="edit-crop-form">
+                    <input type="hidden" id="edit-crop-id">
+                    
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label for="edit-crop-name">Crop Name</label>
+                            <input type="text" id="edit-crop-name" readonly>
+                        </div>
+                        <div class="form__group">
+                            <label for="edit-crop-quantity">Quantity (kg)</label>
+                            <input type="number" id="edit-crop-quantity" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label for="edit-crop-price">Price per kg (Rs.)</label>
+                            <input type="number" id="edit-crop-price" required>
+                        </div>
+                        <div class="form__group">
+                            <label for="edit-crop-location">Location</label>
+                            <input type="text" id="edit-crop-location" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form__group">
+                        <label for="edit-crop-description">Description</label>
+                        <textarea id="edit-crop-description" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form__actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ri-save-line"></i>
+                            Save Changes
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="closeEditModal()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="farmer.js"></script>
+
+<input type="text" id="date-filter" placeholder="Select date" readonly>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Initialize the picker -->
+<script>
+  flatpickr("#date-filter", {
+    dateFormat: "Y-m-d",
+    maxDate: "today",
+    onChange: function(selectedDates, dateStr, instance) {
+      console.log("Selected date:", dateStr);
+    }
+  });
+</script>
+</body>
+</html>
+

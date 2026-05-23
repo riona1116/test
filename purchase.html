@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Purchase Crop | Krishi Connect</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="../assets/logo.png" alt="Krishi Connect Logo" class="logo" />
+      <h1 class="site-title">Krishi Connect</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="market.html">Products</a>
+      <a href="market-prices.html">Market Prices</a>
+      <a href="profile.html">My Profile</a>
+      <a href="../index.html" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Purchase Crop</h2>
+    <div id="crop-info">
+      <!-- Crop details will appear here -->
+    </div>
+
+    <form id="purchase-form">
+      <label>Quantity (KG):
+        <input type="number" id="purchase-quantity" min="1" required />
+      </label>
+      <label>Location:
+        <input type="text" id="purchase-location" required />
+      </label>
+      <label>Payment Method:
+        <select id="payment-method" required>
+          <option value="">Select</option>
+          <option value="cash">Cash on Delivery</option>
+          <option value="card">Credit/Debit Card</option>
+          <option value="mobile">Mobile Payment</option>
+        </select>
+      </label>
+      <button type="submit">Confirm Purchase</button>
+    </form>
+  </main>
+
+<!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Krishi Connect. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cropInfoDiv = document.getElementById('crop-info');
+      const purchaseForm = document.getElementById('purchase-form');
+
+      const selectedCrop = JSON.parse(localStorage.getItem('selectedCrop'));
+
+      if (!selectedCrop) {
+        cropInfoDiv.textContent = 'No crop selected. Please go back and choose a crop.';
+        purchaseForm.style.display = 'none';
+        return;
+      }
+
+      cropInfoDiv.innerHTML = `
+        <h3>${selectedCrop.name}</h3>
+        <p>Price: Rs ${selectedCrop.price} per KG</p>
+        <p>Available Quantity: ${selectedCrop.available} KG</p>
+      `;
+
+      purchaseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const qty = Number(document.getElementById('purchase-quantity').value);
+        const location = document.getElementById('purchase-location').value.trim();
+        const payment = document.getElementById('payment-method').value;
+
+        if (qty <= 0 || qty > Number(selectedCrop.available)) {
+          alert(`Please enter a quantity between 1 and ${selectedCrop.available}`);
+          return;
+        }
+
+        if (!location) {
+          alert('Please enter your location.');
+          return;
+        }
+
+        if (!payment) {
+          alert('Please select a payment method.');
+          return;
+        }
+
+        // Here you can process the purchase, store info in localStorage or send to backend
+        alert(`Purchase confirmed for ${qty} KG of ${selectedCrop.name}. Payment method: ${payment}. Location: ${location}`);
+
+        // Optionally clear selection and redirect
+        localStorage.removeItem('selectedCrop');
+        window.location.href = 'marketplace.html';
+      });
+    });
+  </script>
+</body>
+</html>

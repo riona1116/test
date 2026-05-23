@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmer Profile | Krishi Connect</title>
+  <link rel="stylesheet" href="../Wholesaler/profile.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="Assets/krishiconnectlogo.png" alt="Krishi Connect Logo" class="logo">
+      <h1 class="site-title">Krishi Connect</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="market.html">Products</a>
+      <a href="market-prices.html">Market Prices</a>
+      <a href="profile.html">My Profile</a>
+      <a href="../index.html" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Farmer Profile</h2>
+
+    <section class="profile-section">
+      <div class="profile-photo">
+        <img id="profileImage" src="../assets/default-profile.png" alt="Profile Photo" width="120" />
+        <input type="file" id="photoUpload" accept="image/*" />
+      </div>
+
+      <form id="profileForm">
+        <label>First Name: <input type="text" id="firstName" required /></label><br />
+        <label>Last Name: <input type="text" id="lastName" required /></label><br />
+        <label>Phone Number: <input type="tel" id="phone" maxlength="10" pattern="\d{10}" required /></label><br />
+        <label>Address: <textarea id="address" rows="2"></textarea></label><br />
+
+      
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
+    
+  </main>
+
+ <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Krishi Connect. All rights reserved.</p>
+  </footer>
+
+
+  <script src="../js/farmer.js"></script>
+  <script src="../js/farmer-profile.js"></script>
+</body>
+</html>

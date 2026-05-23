@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Prices - KrishiConnect</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="market-prices.css">
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="krishiconnectlogo.png" type="image/png">
+</head>
+<body>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <img src="krishiconnectlogo.png" alt="KrishiConnect" class="nav__logo-img">
+                <span>KrishiConnect</span>
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">
+                            <i class="ri-home-line"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="market-prices.html" class="nav__link active-link">
+                            <i class="ri-line-chart-line"></i>
+                            <span>Market Prices</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="crop-listing.html" class="nav__link">
+                            <i class="ri-plant-line"></i>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link" onclick="showLoginModal()">
+                            <i class="ri-user-line"></i>
+                            <span>Login</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!--=============== MAIN ===============-->
+    <main class="main">
+        <!--=============== MARKET PRICES HERO ===============-->
+        <section class="market-hero section">
+            <div class="container">
+                <div class="market-hero__content">
+                    <h1 class="market-hero__title">
+                        Live Market <span>Prices</span>
+                    </h1>
+                    <p class="market-hero__description">
+                        Stay updated with real-time agricultural commodity prices across Nepal. 
+                        Make informed decisions with our comprehensive market data.
+                    </p>
+                    <div class="market-hero__stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Commodities</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Markets</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Daily</span>
+                            <span class="stat-label">Updates</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="market-hero__image">
+                    <img src="rice.jpg" alt="Market Prices" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!--=============== PRICE FILTERS ===============-->
+        <section class="price-filters section">
+            <div class="container">
+                <div class="filters__container">
+                    <div class="filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter" onchange="filterPrices()">
+                            <option value="">All Categories</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="grains">Grains & Cereals</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="spices">Spices</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="market-filter">Market</label>
+                        <select id="market-filter" onchange="filterPrices()">
+                            <option value="">All Markets</option>
+                            <option value="kathmandu">Kathmandu</option>
+                            <option value="pokhara">Pokhara</option>
+                            <option value="chitwan">Chitwan</option>
+                            <option value="dharan">Dharan</option>
+                            <option value="butwal">Butwal</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search-filter">Search Product</label>
+                        <input type="text" id="search-filter" placeholder="Search commodities..." oninput="filterPrices()">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-outline" onclick="clearFilters()">
+                            <i class="ri-refresh-line"></i>
+                            Clear Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== MARKET PRICES TABLE ===============-->
+        <section class="market-prices section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Today's Market Prices</h2>
+                    <p class="section__subtitle">Updated: <span id="last-updated"></span></p>
+                </div>
+
+                <div class="prices__container">
+                    <div class="table-responsive">
+                        <table class="prices__table" id="prices-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Market</th>
+                                    <th>Unit</th>
+                                    <th>Min Price</th>
+                                    <th>Max Price</th>
+                                    <th>Avg Price</th>
+                                    <th>Trend</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prices-table-body">
+                                <!-- Prices will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="price-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card trending-up">
+                            <div class="summary-icon">
+                                <i class="ri-arrow-up-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3 id="trending-up-count">0</h3>
+                                <p>Prices Rising</p>
+                            </div>
+                        </div>
+                        <div class="summary-card trending-down">
+                            <div class="summary-icon">
+                                <i class="ri-arrow-down-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3 id="trending-down-count">0</h3>
+                                <p>Prices Falling</p>
+                            </div>
+                        </div>
+                        <div class="summary-card trending-stable">
+                            <div class="summary-icon">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3 id="trending-stable-count">0</h3>
+                                <p>Stable Prices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== PRICE ALERTS ===============-->
+        <section class="price-alerts section">
+            <div class="container">
+                <div class="alerts__content">
+                    <div class="alerts__info">
+                        <h2 class="alerts__title">Get Price Alerts</h2>
+                        <p class="alerts__description">
+                            Stay informed about price changes for your favorite commodities. 
+                            Set up alerts and never miss important market movements.
+                        </p>
+                        <ul class="alerts__features">
+                            <li><i class="ri-check-line"></i> Real-time notifications</li>
+                            <li><i class="ri-check-line"></i> Custom price thresholds</li>
+                            <li><i class="ri-check-line"></i> Multiple commodity tracking</li>
+                            <li><i class="ri-check-line"></i> SMS and email alerts</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showLoginModal()">
+                            <i class="ri-notification-line"></i>
+                            Set Up Alerts
+                        </button>
+                    </div>
+                    <div class="alerts__image">
+                        <img src="tomato.jpg" alt="Price Alerts" class="alerts-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=============== MARKET INSIGHTS ===============-->
+        <section class="market-insights section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Market Insights</h2>
+                    <p class="section__subtitle">Expert analysis and market trends</p>
+                </div>
+
+                <div class="insights__grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="ri-line-chart-line"></i>
+                        </div>
+                        <h3 class="insight-title">Weekly Trends</h3>
+                        <p class="insight-description">
+                            Vegetable prices have shown an upward trend this week due to seasonal factors and increased demand.
+                        </p>
+                        <div class="insight-stats">
+                            <span class="stat-change positive">+12%</span>
+                            <span class="stat-label">vs last week</span>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="ri-plant-line"></i>
+                        </div>
+                        <h3 class="insight-title">Seasonal Forecast</h3>
+                        <p class="insight-description">
+                            Rice harvest season is approaching, expect prices to stabilize in the coming weeks.
+                        </p>
+                        <div class="insight-stats">
+                            <span class="stat-change stable">Stable</span>
+                            <span class="stat-label">next 2 weeks</span>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="ri-truck-line"></i>
+                        </div>
+                        <h3 class="insight-title">Supply Chain</h3>
+                        <p class="insight-description">
+                            Transportation costs have decreased, leading to better margins for farmers and wholesalers.
+                        </p>
+                        <div class="insight-stats">
+                            <span class="stat-change negative">-8%</span>
+                            <span class="stat-label">transport costs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--=============== FOOTER ===============-->
+    <footer class="footer section">
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <a href="index.html" class="footer__logo">
+                        <img src="krishiconnectlogo.png" alt="KrishiConnect" class="footer__logo-img">
+                        <span>KrishiConnect</span>
+                    </a>
+                    <p class="footer__description">
+                        Connecting farmers, wholesalers, and buyers for a sustainable agricultural ecosystem in Nepal.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Quick Links</h3>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Home</a></li>
+                        <li><a href="market-prices.html" class="footer__link">Market Prices</a></li>
+                        <li><a href="crop-listing.html" class="footer__link">Products</a></li>
+                        <li><a href="#" class="footer__link">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Services</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Farmer Registration</a></li>
+                        <li><a href="#" class="footer__link">Wholesaler Portal</a></li>
+                        <li><a href="#" class="footer__link">Price Alerts</a></li>
+                        <li><a href="#" class="footer__link">Market Analysis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Contact Info</h3>
+                    <ul class="footer__links">
+                        <li class="footer__info">
+                            <i class="ri-phone-line"></i>
+                            <span>+977-1-4567890</span>
+                        </li>
+                        <li class="footer__info">
+                            <i class="ri-mail-line"></i>
+                            <span>info@krishiconnect.com</span>
+                        </li>
+                        <li class="footer__info">
+                            <i class="ri-map-pin-line"></i>
+                            <span>Kathmandu, Nepal</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">
+                    &copy; 2024 KrishiConnect. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!--=============== LOGIN MODAL ===============-->
+    <div class="modal" id="login-modal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Login to KrishiConnect</h2>
+                <button class="modal__close" id="modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <form class="login__form" id="login-form">
+                    <div class="form__group">
+                        <label for="user-type">I am a:</label>
+                        <select id="user-type" required>
+                            <option value="">Select user type</option>
+                            <option value="farmer">Farmer</option>
+                            <option value="wholesaler">Wholesaler</option>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label for="login-phone">Phone Number</label>
+                        <input type="tel" id="login-phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="login-code">Access Code</label>
+                        <input type="text" id="login-code" placeholder="Enter your access code" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="ri-login-circle-line"></i>
+                        Login
+                    </button>
+                </form>
+                <div class="login__help">
+                    <p>Demo Credentials:</p>
+                    <p><strong>Farmer:</strong> Phone: 9841234567, Code: FARMER123</p>
+                    <p><strong>Wholesaler:</strong> Phone: 9851234567, Code: WHOLE123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--=============== JAVASCRIPT ===============-->
+    <script src="script.js"></script>
+    <script src="market-prices.js"></script>
+</body>
+</html>
+
